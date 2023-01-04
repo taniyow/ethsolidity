@@ -16,5 +16,7 @@ beforeEach(async () => {
 });
 
 describe('Inbox', () => {
-    it('deployes a contract', () => {});
+    it('deployes a contract', () => {
+        console.log(accounts);
+    });
 });
