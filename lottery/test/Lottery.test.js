@@ -59,6 +59,7 @@ describe("Lottery Contract", () => {
     assert.strictEqual(3, players.length);
   });
 
+  // Try-Catch Assertion
   it('requires a minimum amount of ether to enter', async () => {
     try {
       await lottery.methods.enter().send({
@@ -74,6 +75,7 @@ describe("Lottery Contract", () => {
     }
   });
 
+  // Testing Function Modifiers with Try-Catch Assertion
   it('only manager can call pickWinner', async () => {
     try {
       await lottery.methods.pickWinner().send({
@@ -84,4 +86,24 @@ describe("Lottery Contract", () => {
       assert.ok(err);
     }
   });
+
+  // Running End-to-End Test
+  it('sends money to the winner and reset the players array', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('2', 'ether')
+    });
+
+    const initialBalance = await web3.eth.getBalance(accounts[0]);
+    await lottery.methods.pickWinner().send({ from: accounts[0] });
+    const finalBalance = await web3.eth.getBalance(accounts[0]);
+    const difference = finalBalance - initialBalance;
+    console.log(difference);
+
+    assert(difference > web3.utils.toWei('1.8', 'ether'));
+  });
+
+  // additional test assertions that can be done would be
+  // 1. assert that the list of players resets back to zero by retrieving the list of players array
+  // 2. assert that the lottery balance has zero balance
 });
