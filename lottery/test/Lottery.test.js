@@ -73,4 +73,15 @@ describe("Lottery Contract", () => {
       // when try fails, catch will assert that error
     }
   });
+
+  it('only manager can call pickWinner', async () => {
+    try {
+      await lottery.methods.pickWinner().send({
+        from: accounts[1]
+      });
+      assert(false);
+    } catch (err) {
+      assert.ok(err);
+    }
+  });
 });
