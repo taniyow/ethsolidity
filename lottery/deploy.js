@@ -4,9 +4,7 @@ const { interface, bytecode } = require('./compile');
 
 const provider = new HDWalletProvider(
   'ridge gown oyster provide bar evolve puppy derive grant work barrel omit',
-  // remember to change this to your own phrase!
-  'https://goerli.infura.io/v3/5bd60364dd204c3d881cb312f1b0d783'
-  // remember to change this to your own endpoint!
+  'https://goerli.infura.io/v3/5bd60364dd204c3d881cb312f1b0d783',
 );
 const web3 = new Web3(provider);
 
