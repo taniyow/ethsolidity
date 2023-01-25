@@ -9,6 +9,7 @@ class App extends Component {
         players: [],
         balance: '',
         value: '',
+        message: '',
     };
 
     async componentDidMount() {
@@ -24,10 +25,14 @@ class App extends Component {
 
         const accounts = await web3.eth.getAccounts();
 
+        this.setState({ message: "Waiting on transaction success..." });
+
         await lottery.methods.enter().send({
             from: accounts[0],
             value: web3.utils.toWei(this.state.value, 'ether')
         });
+
+        this.setState({ message: 'You have entered!' });
     }
 
     render() {
@@ -35,9 +40,9 @@ class App extends Component {
             <div>
                 <h2>Lottery Contract</h2>
                 <p>
-                    This contract is managed by {this.state.manager}. There are
-                    currently {this.state.players} people entered, competing to
-                    win {web3.utils.fromWei(this.state.balance, "ether")} ether!
+                    This contract is managed by {this.state.manager}. There are currently{" "}
+                    {this.state.players.length} people entered, competing to win{" "}
+                    {web3.utils.fromWei(this.state.balance, "ether")} ether!
                 </p>
 
                 <hr/>
@@ -53,6 +58,10 @@ class App extends Component {
                     </div>
                     <button>Enter</button>
                 </form>
+
+                <hr />
+
+                <h1>{this.state.message}</h1>
             </div>
         );
     }
