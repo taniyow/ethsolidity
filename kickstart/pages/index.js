@@ -27,6 +27,7 @@ class CampaignIndex extends Component {
         return (
             <>
                 <div>
+                    <h3>Open Campaigns</h3>
                     {this.renderCampaigns()}
                     <Button
                         content="Create Campaign"
