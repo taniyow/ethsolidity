@@ -1,6 +1,10 @@
 import { Component } from 'react';
 import { Form, Button, Input, Message } from 'semantic-ui-react';
+
+// components
 import Layout from '../../components/Layout';
+
+// ethereum contracts instances
 import factory from '../../ethereum/factory';
 import web3 from '../../ethereum/web3';
 
