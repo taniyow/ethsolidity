@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { Form, Input, Button, Message } from 'semantic-ui-react';
 
+import Campaign from '../ethereum/campaign';
+
 class ContributeForm extends Component {
     state = {
         value: ''
@@ -8,7 +10,8 @@ class ContributeForm extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        
+
+        const campaign = new Campaign(this.props.address);
     }
 
     render() {
