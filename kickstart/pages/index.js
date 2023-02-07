@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import 'semantic-ui-css/semantic.min.css';
 
 import factory from '../ethereum/factory';
 
