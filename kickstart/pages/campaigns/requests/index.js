@@ -2,12 +2,21 @@ import { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import { Link } from '../../../routes';
 import Layout from '../../../components/Layout';
+import Campaign from '../../../ethereum/campaign';
 
 class RequestIndex extends Component {
     static async getInitialProps(props) {
         const { address } = props.query;
+        const campaign = Campaign(address);
+        const requestCount = await campaign.methods.getRequestsCount().call();
 
-        return { address }
+        const requests = await Promise.all(
+            Array(parseInt(requestCount)).fill().map((element, index) => {
+                return campaign.methods.requests(index).call()
+            })
+        )
+
+        return { address, requests, requestCount }
     }
 
     render() {
